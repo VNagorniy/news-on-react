@@ -7,15 +7,20 @@ import NewsList from '../components/NewsList/NewsList';
 import Skeleton from '../components/Skeleton/Skeleton';
 import Pagination from '../components/Pagination/Pagination';
 import Categories from '../components/Categories/Categories';
+import Search from '../components/Search/Search';
+import { useDebounce } from '../helpers/hooks/useDebounce';
 
 const Main = () => {
 	const [news, setNews] = useState([]);
 	const [isLoading, setIsLoading] = useState(true);
 	const [currentPage, setCurrentPage] = useState(1);
 	const [categories, setCategories] = useState([]);
+	const [keywords, setKeywords] = useState('');
 	const [selectedCategory, setSelectedCategory] = useState('All');
 	const totalPages = 10;
 	const pageSize = 10;
+
+	const debouncedKeywords = useDebounce(keywords, 1500);
 
 	const fetchNews = async (currentPage) => {
 		try {
@@ -23,7 +28,8 @@ const Main = () => {
 			const response = await getNews({
 				page_number: currentPage,
 				page_size: pageSize,
-				category: selectedCategory === 'All' ? null : selectedCategory
+				category: selectedCategory === 'All' ? null : selectedCategory,
+				keywords: debouncedKeywords
 			});
 			setNews(response.news);
 			setIsLoading(false);
@@ -47,7 +53,7 @@ const Main = () => {
 
 	useEffect(() => {
 		fetchNews(currentPage);
-	}, [currentPage, selectedCategory]);
+	}, [currentPage, selectedCategory, debouncedKeywords]);
 
 	const handleNextPage = () => {
 		if (currentPage < totalPages) {
@@ -68,6 +74,7 @@ const Main = () => {
 	return (
 		<main className={styles.main}>
 			<Categories categories={categories} setSelectedCategory={setSelectedCategory} selectedCategory={selectedCategory} />
+			<Search keywords={keywords} setKeywords={setKeywords} />
 			{news.length > 0 && !isLoading ? <NewsBanner item={news[0]} /> : <Skeleton type={'banner'} count={1} />}
 			<Pagination handlePreviousPage={handlePreviousPage} handleNextPage={handleNextPage} handlePageClick={handlePageClick} totalPages={totalPages} currentPage={currentPage} />
 			{!isLoading ? <NewsList news={news} /> : <Skeleton type={'item'} count={10} />}
