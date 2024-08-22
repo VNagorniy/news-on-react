@@ -1,8 +1,15 @@
-# React + Vite
+# Создание приложения по выводу новостей (по примеру проекта Reactify)
+[Смотреть демо](https://blognews-react-fas6ldwip-vnagorniys-projects.vercel.app/)
+- Vite
+- React
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+## Работа с проектом :
+- Подключение CURRENTS API.
+- Создание Skeleton.
+- Реализация поиска новостей и использование useDebounce.
+- Создание пагинации, фильтрации по категориям.
 
-Currently, two official plugins are available:
+На данный момент проект дорабатывается.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+
+
