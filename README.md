@@ -1,5 +1,5 @@
 # Создание приложения по выводу новостей (по примеру проекта Reactify)
-[Смотреть демо](https://blognews-react-fas6ldwip-vnagorniys-projects.vercel.app/)
+[Смотреть демо](https://blognews-react-git-main-vnagorniys-projects.vercel.app)
 - Vite
 - React
 
